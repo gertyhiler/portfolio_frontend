@@ -2,26 +2,93 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+html {
+  font-size: 14px;
+  scroll-behavior: smooth;
+}
+
+.header {
+  @apply rounded-b-xl bg-slate-200 dark:bg-slate-500 pt-10
+}
+
+.header__wrapper {
+  @apply flex flex-wrap justify-between items-center mx-auto max-w-screen-xl
+}
+
+@media screen and (width <= 340px) {
+  .header__wrapper {
+    @apply justify-center flex-col
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.header-content {
+  @apply flex gap-3 mb-10
+}
+
+.navigation__link {
+  @apply text-lg md:text-xl dark:text-gray-300 dark:hover:text-gray-200 hover:text-gray-500 text-gray-900 transition-colors
+}
+
+.navigation__link_active {
+  @apply dark:text-gray-100  text-gray-600
+}
+
+.content {
+  @apply work header mt-10 rounded-t-xl px-5 md:px-10 rounded-b-none
+}
+
+.content p:not(:last-child) {
+  @apply mb-3
+}
+.header__image {
+  @apply lg:w-8 lg:h-8 h-5 w-5
+}
+
+.header__item {
+  @apply w-fit h-fit
+}
+
+.header__link {
+  @apply block w-fit h-fit hover:scale-110 transition-transform
+}
+
+.work__list {
+  @apply grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 xl:grid-cols-2
+}
+
+.work {
+  @apply container mx-auto py-5 md:py-20
+}
+
+.work__item {
+  @apply bg-slate-200 dark:bg-slate-500 rounded-lg h-max
+}
+
+.work__link:not(.cursor-not-allowed) {
+  @apply hover:scale-110
+}
+
+.work__link {
+  @apply inline-flex gap-2 py-1 pr-2 pl-1 bg-gray-200 border-2 border-solid border-gray-400 rounded-2xl transition-transform;
+  border-radius: inherit;
+}
+
+.work__technology-image {
+  @apply w-10 h-auto
+}
+
+.work__image {
+  border-radius: inherit;
+}
+
+.work__view-list {
+  @apply inline-flex gap-2
+}
+
+.navigation {
+  @apply flex gap-3 py-3
 }
