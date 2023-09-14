@@ -3,7 +3,7 @@ export async function getData() {
     try {
         const res = await fetch(
             `${API_URL}/api/works/?populate[teches][populate][0]=logo&populate=screenshot`,
-            {cache: "no-cache"}
+            {cache: "default"}
         );
         if (!res.ok) {
             // This will activate the closest `error.js` Error Boundary
