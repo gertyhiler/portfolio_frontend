@@ -1,9 +1,9 @@
-import { TechType } from "@/types/api";
+import { Technology } from "@/types/api";
 
 export interface IWorkCard {
   headline: string;
   description: string;
   link: string;
   screenshot: string;
-  tech: TechType[];
+  tech: Technology[];
 }

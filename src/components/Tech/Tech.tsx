@@ -1,8 +1,8 @@
 import {API_URL} from "@/$api/getData";
 import React from "react";
-import {TechType} from "@/types/api";
+import {Technology} from "@/types/api";
 
-export function Tech(tech: TechType) {
+export function Tech(tech: Technology) {
     return (
         <li className="inline-flex w-14 h-14 gap-1.5 items-center justify-center px-1 py-1">
             <img

@@ -1,4 +1,3 @@
-import { apiResponse } from "@/types/api";
 import { WorkCard } from "../WorkCard";
 import { API_URL, getData } from "@/$api/getData";
 import { FC } from "react";
