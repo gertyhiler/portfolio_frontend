@@ -2,49 +2,22 @@
 import React, {type FC, useState} from 'react';
 import Image from 'next/image'
 import Link from "next/link";
+import { DefaultImageType } from '@/types/api';
+import { BACKEND_URL } from '@/constant/back-route';
 
-export const Header: FC = () => {
+export const Header: FC<{profile: DefaultImageType}> = ({profile}) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     return (
-        //   <header className="header animate__animated animate__fadeInDown">
-        //   <div className="header__wrapper">
-        //     <div className="header-content">
-        //       <img className="w-20 h-20 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="/36032455.jpeg" alt="Bordered avatar"/>
-        //       <div>
-        //         <h1 className="font-medium text-2xl dark:text-white">Андрей Коробка</h1>
-        //         <div className="inline-flex items-center justify-center w-full py-2">
-        //           <ul className="flex gap-2">
-        //             <li className="header__item">
-        //               <a target="_blank" href="https://github.com/gertyhiler" className="header__link">
-        //                 <Image src="/github.svg" alt="Логотип гитхаб"  width={100} height={100} className="header__image"/>
-        //
-        //               </a>
-        //             </li>
-        //             <li className="header__item">
-        //               <a target="_blank" href="https://t.me/bananawinst" className="header__link">
-        //                 <Image src="/telegram-1.svg" alt="Логотип телеграмма"  width={100} height={100} className="header__image"/>
-        //               </a>
-        //             </li>
-        //             <li className="header__item">
-        //               <a target="_blank" href="mailto:tryuserrus@gmail.com" className="header__link">
-        //                 <Image src="/gmail-icon.svg" alt="Логотип почты"  width={100} height={100} className="header__image"/>
-        //               </a>
-        //             </li>
-        //           </ul>
-        //         </div>
-        //       </div>
-        //     </div>
-        //     <Navigation navLinks={[{href: '/', name: 'Проекты'}]}/>
-        //   </div>
-        // </header>
-
         <header className="animate__animated animate__fadeInDown">
             <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 rounded-b-lg">
                 <div className="header__wrapper">
                     <Link href="/" className="flex items-center gap-4">
-                        <img
+                        <Image
                             className="lg:w-20 lg:h-20 w-10 h-10 p-1 rounded-full ring-2 ring-purple-300 dark:ring-purple-500"
-                            src="/36032455.jpeg" alt="Bordered avatar"/>
+                            src={`${BACKEND_URL}${profile.formats.medium.url}`} alt={profile.alternativeText || "Фото профиля"}
+                            width={profile.formats.medium.width} height={profile.formats.medium.height}
+                            placeholder='blur' priority blurDataURL={`${BACKEND_URL}${profile.formats.thumbnail.url}`}
+                            />
                         <h1 className="self-center lg:text-xl font-semibold whitespace-nowrap dark:text-white">Андрей
                             Коробка</h1>
                     </Link>

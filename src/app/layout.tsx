@@ -7,6 +7,7 @@ import React from "react";
 import { Footer } from "@/components/Footer/Footer";
 import Script from "next/script";
 import { SeoLinks } from "@/components/SeoLinks/SeoLinks";
+import { getProfile } from "@/$api/getData";
 
 const font = Montserrat({ subsets: ["latin"] });
 
@@ -16,11 +17,13 @@ export const metadata: Metadata = {
   themeColor: "#1F2937",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const profile = await getProfile();
+  console.log('profile: ', profile);
   return (
     <html lang="ru">
       <Script src="/ya.metrica.js" />
@@ -33,7 +36,7 @@ export default function RootLayout({
       <body
         className={`${font.className} dark:bg-gray-900 px-2 md:px-6 animate__animated animate__fadeIn`}
       >
-        <Header />
+        <Header profile={profile.data.attributes.photo.data.attributes}/>
         <main>{children}</main>
         <Footer />
       </body>
