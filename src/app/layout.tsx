@@ -23,7 +23,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const profile = await getProfile();
-  console.log('profile: ', profile);
   return (
     <html lang="ru">
       <Script src="/ya.metrica.js" />
