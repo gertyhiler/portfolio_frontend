@@ -1,10 +1,12 @@
 import {ProfileResponse, WorkResponse, PagesResponse} from '@/types/api';
 
 export const API_URL = process.env.API_URL || "http://localhost:1337";
+const REVALIDATE_TIME = 600;
+
 export async function getData(): Promise<WorkResponse[]> {
   const res = await fetch(
     `${API_URL}/api/works/?sort=position&populate[teches][populate][0]=logo&populate=screenshot`,
-    { next: { revalidate: 600 } }
+    { next: { revalidate: REVALIDATE_TIME } }
   );
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -16,7 +18,7 @@ export async function getData(): Promise<WorkResponse[]> {
 export async function getProfile(): Promise<ProfileResponse> {
   const res = await fetch(
     `${API_URL}/api/profile?populate=*`,
-    { next: { revalidate: 600 } }
+    { next: { revalidate: REVALIDATE_TIME } }
   );
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -28,7 +30,7 @@ export async function getProfile(): Promise<ProfileResponse> {
 export async function getPages(): Promise<PagesResponse> {
   const res = await fetch(
     `${API_URL}/api/pages?populate[seo][populate]=*`,
-    { next: { revalidate: 600 } }
+    { next: { revalidate: REVALIDATE_TIME } }
   );
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -39,7 +41,7 @@ export async function getPages(): Promise<PagesResponse> {
 // export async function getPage(route: Routes): Promise<any> {
 //   const res = await fetch(
 //     `${API_URL}/api/pages/?populate=*`,
-//     { next: { revalidate: 600 } }
+//     { next: { revalidate: REVALIDATE_TIME } }
 //   );
 //   if (!res.ok) {
 //     throw new Error("Failed to fetch data");
