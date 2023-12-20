@@ -20,6 +20,7 @@ export interface Seo {
   structuredData: String;
   metaViewport: String;
   canonicalURL: String;
+  metaImage: UniversalDataType<DefaultImageType>
 }
 
 export type WorkResponse = {

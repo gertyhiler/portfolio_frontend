@@ -27,7 +27,7 @@ export async function getProfile(): Promise<ProfileResponse> {
 
 export async function getPages(): Promise<PagesResponse> {
   const res = await fetch(
-    `${API_URL}/api/pages?populate=*`,
+    `${API_URL}/api/pages?populate[seo][populate]=*`,
     { next: { revalidate: 600 } }
   );
   if (!res.ok) {
