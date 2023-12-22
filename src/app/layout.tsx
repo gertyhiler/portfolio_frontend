@@ -34,6 +34,7 @@ export async function generateMetadata(
   );
 
   return {
+    metadataBase: new URL('https://andrew-web.ru/'),
     title: currentPageMetadata?.attributes.seo[0].metaTitle || metadata.title,
     colorScheme: "light dark",
     creator: "Андрей Коробка",
