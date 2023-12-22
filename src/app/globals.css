@@ -2,13 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
+*,
+*::after,
+*::before {
   box-sizing: border-box;
 }
 
 html {
   font-size: 14px;
-  scroll-behavior: smooth;
+  --scroll-behavior: smooth!important;
+  scroll-behavior: smooth!important;
 }
 
 .header {

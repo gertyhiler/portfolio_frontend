@@ -10,7 +10,7 @@ import Script from "next/script";
 import { SeoLinks } from "@/components/SeoLinks/SeoLinks";
 import { getPages, getProfile } from "@/$api/getData";
 import { headers } from "next/dist/client/components/headers";
-import {BACKEND_URL} from '@/constant/back-route';
+import { BACKEND_URL } from "@/constant/back-route";
 
 const font = Montserrat({ subsets: ["latin"] });
 
@@ -29,7 +29,9 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const currentPath = headers().get("x-next-path-page");
   const pages = await getPages();
-  const currentPageMetadata = pages.data.find((_) => _.attributes.path === currentPath);
+  const currentPageMetadata = pages.data.find(
+    (_) => _.attributes.path === currentPath
+  );
 
   return {
     title: currentPageMetadata?.attributes.seo[0].metaTitle || metadata.title,
@@ -46,7 +48,9 @@ export async function generateMetadata(
         "https://andrew-web.ru/",
     },
     openGraph: {
-      images: [`${BACKEND_URL}${currentPageMetadata?.attributes.seo[0].metaImage.data.attributes.url}`],
+      images: [
+        `${BACKEND_URL}${currentPageMetadata?.attributes.seo[0].metaImage.data.attributes.url}`,
+      ],
       type: "website",
       locale: "ru",
       description:
@@ -73,12 +77,12 @@ export default async function RootLayout({
 
   return (
     <html lang="ru">
-      <Script src="/ya.metrica.js" />
+      <Script async src="/ya.metrica.js" />
       <Script
         async
         src="https://www.googletagmanager.com/gtag/js?id=G-2004SZCNZX"
       />
-      <Script src="/ga-tag.js" />
+      <Script async src="/ga-tag.js" />
       <SeoLinks />
       <body
         className={`${font.className} dark:bg-gray-900 px-2 md:px-6 animate__animated animate__fadeIn`}
