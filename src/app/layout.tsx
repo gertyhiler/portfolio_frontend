@@ -31,39 +31,38 @@ export async function generateMetadata(
   const pages = await getPages();
   const currentPageMetadata = pages.data.find(
     (_) => _.attributes.path === currentPath
-  );
+    );
 
   return {
     metadataBase: new URL('https://andrew-web.ru/'),
-    title: currentPageMetadata?.attributes.seo[0].metaTitle || metadata.title,
-    colorScheme: "light dark",
+    title: currentPageMetadata?.attributes.seo.metaTitle || metadata.title,
     creator: "Андрей Коробка",
-    keywords: currentPageMetadata?.attributes.seo[0].keywords,
+    keywords: currentPageMetadata?.attributes.seo.keywords,
     description:
-      currentPageMetadata?.attributes.seo[0].metaDescription ||
+      currentPageMetadata?.attributes.seo.metaDescription ||
       metadata.description ||
       "",
     alternates: {
       canonical:
-        currentPageMetadata?.attributes.seo[0].canonicalURL ||
-        "https://andrew-web.ru/",
+        currentPageMetadata?.attributes.seo.canonicalURL ||
+        `https://andrew-web.ru${currentPath}`,
     },
     openGraph: {
       images: [
-        `${BACKEND_URL}${currentPageMetadata?.attributes.seo[0].metaImage.data.attributes.url}`,
+        `${BACKEND_URL}${currentPageMetadata?.attributes.seo.metaImage.data?.attributes.url}`,
       ],
       type: "website",
       locale: "ru",
       description:
-        currentPageMetadata?.attributes.seo[0].metaDescription ||
+        currentPageMetadata?.attributes.seo.metaDescription ||
         metadata.description ||
         "",
       title:
-        currentPageMetadata?.attributes.seo[0].metaTitle ||
+        currentPageMetadata?.attributes.seo.metaTitle ||
         metadata.title ||
         "",
       url:
-        currentPageMetadata?.attributes.seo[0].canonicalURL ||
+        currentPageMetadata?.attributes.seo.canonicalURL ||
         "https://andrew-web.ru/",
     },
   };
@@ -75,10 +74,11 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const profile = await getProfile();
-
+  const currentPath = headers().get("x-next-path-page");
   return (
     <html lang="ru">
       <Script async src="/ya.metrica.js" />
+      <meta name="color-scheme" content="light dark" />
       <Script
         async
         src="https://www.googletagmanager.com/gtag/js?id=G-2004SZCNZX"
@@ -88,7 +88,7 @@ export default async function RootLayout({
       <body
         className={`${font.className} dark:bg-gray-900 px-2 md:px-6 animate__animated animate__fadeIn`}
       >
-        <Header profile={profile.data.attributes.photo.data.attributes} />
+        <Header profile={profile.data.attributes.photo.data.attributes}/>
         <main>{children}</main>
         <Footer />
       </body>
