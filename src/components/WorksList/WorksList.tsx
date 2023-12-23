@@ -9,6 +9,7 @@ const WorksList: FC = async () => {
       {data.map((i) => {
         return (
           <WorkCard
+            variant="work"
             screenshot={`${API_URL}${i.attributes.screenshot.data.attributes.formats.large.url}`}
             description={i.attributes.description}
             headline={i.attributes.headline}

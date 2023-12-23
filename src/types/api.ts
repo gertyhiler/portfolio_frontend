@@ -11,6 +11,18 @@ export type Meta =
     }
   | EmptyObj;
 
+interface IncludesSeo {
+  seo: Seo;
+}
+
+interface BaseAttributes {
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface BaseResponse {
+  meta: Meta;
+}
 export interface Seo {
   id: number;
   metaTitle: String;
@@ -74,7 +86,7 @@ interface Formats {
   medium: FormatImage;
   thumbnail: FormatImage;
 }
-export interface DefaultImageType {
+export interface DefaultImageType extends BaseAttributes {
   name: string;
   alternativeText: String;
   caption: String;
@@ -89,27 +101,25 @@ export interface DefaultImageType {
   previewUrl: any;
   provider: string;
   provider_metadata: any;
-  createdAt: string;
-  updatedAt: string;
 }
 
-export interface Profile {
+export interface Profile extends BaseAttributes {
   photo: UniversalDataType<DefaultImageType>;
-  createdAt: string;
-  updatedAt: string;
 }
 
-export interface Pages {
+export interface Pages extends BaseAttributes, IncludesSeo {
   path: string;
-  createdAt: string;
-  updatedAt: string;
-  seo: Seo[];
 }
 
-export interface ProfileResponse extends UniversalDataType<Profile> {
-  meta: Meta;
+export interface Article extends BaseAttributes, IncludesSeo {
+  content: string;
+  title: string;
+  slug: string
 }
 
-export interface PagesResponse extends UniversalArrayDataType<Pages> {
-  meta: Meta;
-}
+export interface ProfileResponse extends UniversalDataType<Profile>, BaseResponse {}
+
+export interface PagesResponse extends UniversalArrayDataType<Pages>, BaseResponse {}
+
+export interface ArticleResponse extends UniversalDataType<Article>, BaseResponse{}
+export interface ArticlesResponse extends UniversalArrayDataType<Exclude<Article, Seo>>, BaseResponse {}
