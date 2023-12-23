@@ -14,6 +14,18 @@ html {
   scroll-behavior: smooth!important;
 }
 
+body {
+  @apply flex flex-col content-between h-full min-h-screen;
+}
+
+header, footer {
+  @apply flex-grow-0 flex-shrink-0 basis-auto
+}
+
+main {
+  @apply flex-shrink flex-grow basis-auto
+}
+
 .header {
   @apply rounded-b-xl bg-slate-200 dark:bg-slate-500 pt-10
 }
@@ -48,7 +60,7 @@ html {
   @apply mb-3
 }
 .header__image {
-  @apply lg:w-8 lg:h-8 h-5 w-5
+  @apply w-8 h-8
 }
 
 .header__item {
@@ -56,7 +68,7 @@ html {
 }
 
 .header__link {
-  @apply block w-fit h-fit hover:scale-110 transition-transform
+  @apply block w-fit h-fit hover:opacity-70 transition-opacity
 }
 
 .work__list {
@@ -64,7 +76,7 @@ html {
 }
 
 .work {
-  @apply container mx-auto py-5 md:py-20
+  @apply container mx-auto py-5
 }
 
 .work__item {
