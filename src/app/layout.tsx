@@ -35,34 +35,34 @@ export async function generateMetadata(
 
   return {
     metadataBase: new URL('https://andrew-web.ru/'),
-    title: currentPageMetadata?.attributes.seo.metaTitle || metadata.title,
+    title: currentPageMetadata?.attributes.seo?.metaTitle || metadata.title || "Андрей Коробка",
     creator: "Андрей Коробка",
-    keywords: currentPageMetadata?.attributes.seo.keywords,
+    keywords: currentPageMetadata?.attributes.seo?.keywords || "",
     description:
-      currentPageMetadata?.attributes.seo.metaDescription ||
+      currentPageMetadata?.attributes.seo?.metaDescription ||
       metadata.description ||
       "",
     alternates: {
       canonical:
-        currentPageMetadata?.attributes.seo.canonicalURL ||
+        currentPageMetadata?.attributes.seo?.canonicalURL ||
         `https://andrew-web.ru${currentPath}`,
     },
     openGraph: {
       images: [
-        `${BACKEND_URL}${currentPageMetadata?.attributes.seo.metaImage.data?.attributes.url}`,
+        `${BACKEND_URL}${currentPageMetadata?.attributes.seo?.metaImage.data?.attributes.url}`,
       ],
       type: "website",
       locale: "ru",
       description:
-        currentPageMetadata?.attributes.seo.metaDescription ||
+        currentPageMetadata?.attributes.seo?.metaDescription ||
         metadata.description ||
         "",
       title:
-        currentPageMetadata?.attributes.seo.metaTitle ||
+        currentPageMetadata?.attributes.seo?.metaTitle ||
         metadata.title ||
         "",
       url:
-        currentPageMetadata?.attributes.seo.canonicalURL ||
+        currentPageMetadata?.attributes.seo?.canonicalURL ||
         "https://andrew-web.ru/",
     },
   };

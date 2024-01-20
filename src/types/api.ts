@@ -12,7 +12,7 @@ export type Meta =
   | EmptyObj;
 
 interface IncludesSeo {
-  seo: Seo;
+  seo: Seo | null;
 }
 
 interface BaseAttributes {
