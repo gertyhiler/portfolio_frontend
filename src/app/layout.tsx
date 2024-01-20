@@ -18,9 +18,6 @@ const metadata: Metadata = {
   title: "Портфолио | Коробка Андрей",
   description: "Список всех мной реализованных проектов",
   themeColor: "#1F2937",
-  verification: {
-    yandex: "40b6db3c7c4d4795"
-  }
 };
 type Props = {
   params: {};
@@ -41,6 +38,9 @@ export async function generateMetadata(
     title: currentPageMetadata?.attributes.seo?.metaTitle || metadata.title || "Андрей Коробка",
     creator: "Андрей Коробка",
     keywords: currentPageMetadata?.attributes.seo?.keywords || "",
+    verification: {
+      yandex: "40b6db3c7c4d4795"
+    },
     description:
       currentPageMetadata?.attributes.seo?.metaDescription ||
       metadata.description ||
