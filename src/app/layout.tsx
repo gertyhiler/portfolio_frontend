@@ -18,6 +18,9 @@ const metadata: Metadata = {
   title: "Портфолио | Коробка Андрей",
   description: "Список всех мной реализованных проектов",
   themeColor: "#1F2937",
+  verification: {
+    yandex: "40b6db3c7c4d4795"
+  }
 };
 type Props = {
   params: {};
