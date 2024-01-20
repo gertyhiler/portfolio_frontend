@@ -1,4 +1,4 @@
-import { getArticle, getArticles } from "@/$api/getData";
+import { getArticle } from "@/$api/getData";
 import MDX from "@/components/MDX";
 import { type FC } from "react";
 import { serialize } from "next-mdx-remote/serialize";
@@ -24,26 +24,17 @@ export async function generateMetadata(
   } = await getArticle(props.params.slug);
 
   const { seo } = attributes;
-  const parentMetadata = await parent;
   return {
-    title: seo.metaTitle,
-    description: seo.metaDescription,
-    keywords: seo.keywords,
+    title: seo?.metaTitle,
+    description: seo?.metaDescription,
+    keywords: seo?.keywords,
     openGraph: {
-      title: seo.metaTitle || undefined,
-      description: seo.metaDescription || undefined,
+      title: seo?.metaTitle || undefined,
+      description: seo?.metaDescription || undefined,
       modifiedTime: attributes.updatedAt,
       type: "article",
-      images: [`${BACKEND_URL}${seo.metaImage.data.attributes.url}`],
+      images: [`${BACKEND_URL}${seo?.metaImage.data.attributes.url}`],
     },
-  };
-}
-
-export async function getStaticPaths() {
-  const articles = await getArticles();
-  return {
-    paths: articles.data.map((article) => `/blog/${article.attributes.slug}`),
-    fallback: true,
   };
 }
 
@@ -59,21 +50,21 @@ const ArticlePage: FC<ArticlePageProps> = async ({ params: { slug } }) => {
   return (
     <>
     <section className="max-w-screen-md mx-auto py-20 px-5 sm:px-0">
-      {article.data.attributes.seo.metaImage !== null ? (
+      {article.data.attributes.seo?.metaImage !== null ? (
         <div className="flex-shrink-0 relative w-full rounded-xl overflow-hidden h-[350px] before:absolute before:inset-x-0 before:w-full before:h-full before:bg-gradient-to-t before:from-gray-900/[.7] before:z-[1]">
           <Image
             className="w-full h-full absolute top-0 start-0 object-cover"
-            src={`${BACKEND_URL}${article.data.attributes.seo.metaImage.data.attributes.formats.large.url}`}
+            src={`${BACKEND_URL}${article.data.attributes.seo?.metaImage.data.attributes.formats.large.url}`}
             width={
-              article.data.attributes.seo.metaImage.data.attributes.formats
+              article.data.attributes.seo?.metaImage.data.attributes.formats
                 .large.width
             }
             height={
-              article.data.attributes.seo.metaImage.data.attributes.formats
+              article.data.attributes.seo?.metaImage.data.attributes.formats
                 .large.height
             }
             alt={
-              article.data.attributes.seo.metaImage.data.attributes
+              article.data.attributes.seo?.metaImage.data.attributes
                 .alternativeText || "изображение в блоге"
             }
           />
@@ -100,7 +91,7 @@ const ArticlePage: FC<ArticlePageProps> = async ({ params: { slug } }) => {
                 {article.data.attributes.title}
               </h1>
               <p className="mt-2 text-white/[.8]">
-                {article.data.attributes.seo.metaDescription}
+                {article.data.attributes.seo?.metaDescription}
               </p>
             </div>
           </div>
